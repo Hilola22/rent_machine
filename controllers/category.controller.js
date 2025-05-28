@@ -1,5 +1,6 @@
 const { sendErrorResponse } = require("../helpers/send.error.response");
 const Category = require("../models/category.model");
+const Machine = require("../models/machine.model");
 
 const addCategory = async (req, res) => {
   try {
@@ -14,7 +15,14 @@ const addCategory = async (req, res) => {
 
 const findAll = async (req, res) => {
   try {
-    const categories = await Category.findAll();
+    const categories = await Category.findAll({
+      include: [
+        {
+          model: Machine,
+        },
+      ],
+      attributes: ["name"],
+    });
     res.status(200).send({ data: categories });
   } catch (error) {
     sendErrorResponse(error, res);

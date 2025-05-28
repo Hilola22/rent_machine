@@ -1,10 +1,11 @@
 const { sendErrorResponse } = require("../helpers/send.error.response");
 const District = require("../models/district.model");
+const Region = require("../models/region.model");
 
 const addDistrict = async (req, res) => {
   try {
-    const { name } = req.body;
-    const newDistrict = await District.create({ name });
+    const { name, regionId } = req.body;
+    const newDistrict = await District.create({ name, regionId });
 
     res.status(201).send({ message: "New district created!", newDistrict });
   } catch (error) {
@@ -14,7 +15,15 @@ const addDistrict = async (req, res) => {
 
 const findAll = async (req, res) => {
   try {
-    const districts = await District.findAll();
+    const districts = await District.findAll({
+      include: [
+        {
+          model: Region,
+          attributes: ["name"],
+        },
+      ],
+      attributes: ["name"],
+    });
     res.status(200).send({ data: districts });
   } catch (error) {
     sendErrorResponse(error, res);

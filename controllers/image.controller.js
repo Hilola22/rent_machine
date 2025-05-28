@@ -1,12 +1,13 @@
 const { sendErrorResponse } = require("../helpers/send.error.response");
 const Image = require("../models/image.model");
+const Machine = require("../models/machine.model");
 
 const addImage = async (req, res) => {
   try {
-    const { image_url, uploaded_at } = req.body;
-    const newImage = await Image.create({ image_url, uploaded_at });
+    const { image_url, uploaded_at, machineId } = req.body;
+    const newImage = await Image.create({ image_url, uploaded_at, machineId });
 
-    res.image(201).send({ message: "New image created!", newImage });
+    res.status(201).send({ message: "New image created!", newImage });
   } catch (error) {
     sendErrorResponse(error, res);
   }
@@ -14,8 +15,12 @@ const addImage = async (req, res) => {
 
 const findAll = async (req, res) => {
   try {
-    const images = await Image.findAll();
-    res.image(200).send({ data: images });
+    const images = await Image.findAll({ include: [
+      {
+        model: Machine,
+      }
+    ]});
+    res.status(200).send({ data: images });
   } catch (error) {
     sendErrorResponse(error, res);
   }
@@ -28,7 +33,7 @@ const findOne = async (req, res) => {
     if (!image) {
       return res.image(404).send({ message: "Image not found" });
     }
-    res.image(200).send({ data: image });
+    res.status(200).send({ data: image });
   } catch (error) {
     sendErrorResponse(error, res);
   }
@@ -40,7 +45,7 @@ const update = async (req, res) => {
       { ...req.body },
       { where: { id: req.params.id }, returning: true }
     );
-    res.image(200).send({ message: "Image updated successfully!" });
+    res.status(200).send({ message: "Image updated successfully!" });
   } catch (error) {
     sendErrorResponse(error, res);
   }
@@ -57,7 +62,7 @@ const remove = async (req, res) => {
       return res.image(404).send({ message: "Image not found" });
     }
 
-    res.image(200).send({ message: "Image deleted successfully" });
+    res.status(200).send({ message: "Image deleted successfully" });
   } catch (error) {
     sendErrorResponse(error, res);
   }

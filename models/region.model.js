@@ -23,4 +23,5 @@ const Region = sequelize.define(
   }
 );
 
+
 module.exports = Region;

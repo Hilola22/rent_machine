@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
+// const Machine = require("./machine.model");
 
 const Image = sequelize.define(
   "image",
@@ -12,16 +13,9 @@ const Image = sequelize.define(
     image_url: {
       type: DataTypes.STRING(255),
       allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
     },
-    upoaded_at: {
+    uploaded_at: {
       type: DataTypes.DATE,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
     },
   },
   {
@@ -29,5 +23,8 @@ const Image = sequelize.define(
     timestamps: false,
   }
 );
+
+// Machine.hasMany(Image);
+// Image.belongsTo(Machine);
 
 module.exports = Image;

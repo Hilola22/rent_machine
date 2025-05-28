@@ -5,6 +5,10 @@ const districtRouter = require("../routes/district.routes");
 const commissionRouter = require("../routes/commission.routes");
 const statusRouter = require("../routes/status.routes");
 const imageRouter = require("../routes/image.routes");
+const usersRouter = require("../routes/users.routes");
+const useraddressRouter = require("../routes/user_address.routes");
+const machineRouter = require("../routes/machine.routes");
+const reviewRouter = require("../routes/review.routes");
 
 router.use("/category", categoryRouter);
 router.use("/region", regionRouter);
@@ -12,5 +16,9 @@ router.use("/district", districtRouter);
 router.use("/commission", commissionRouter);
 router.use("/status", statusRouter);
 router.use("/image", imageRouter);
+router.use("/users", usersRouter);
+router.use("/useraddress", useraddressRouter);
+router.use("/machine", machineRouter);
+router.use("/review", reviewRouter);
 
 module.exports = router;

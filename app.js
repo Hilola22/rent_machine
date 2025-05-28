@@ -2,7 +2,7 @@ const express = require("express");
 const config = require("config");
 const sequelize = require("./config/db");
 const PORT = config.get("port") || 4000;
-const indexRouter = require("./routes/index.routes");
+const indexRouter = require("./routes/index.routes")
 
 const app = express();
 app.use(express.json());
