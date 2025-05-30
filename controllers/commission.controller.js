@@ -3,8 +3,8 @@ const Commission = require("../models/commision.model");
 
 const addCommission = async (req, res) => {
   try {
-    const { persent } = req.body;
-    const newCommission = await Commission.create({ persent });
+    const { percent } = req.body;
+    const newCommission = await Commission.create({ percent });
 
     res.status(201).send({ message: "New commission created!", newCommission });
   } catch (error) {
@@ -41,7 +41,7 @@ const update = async (req, res) => {
       { where: { id: req.params.id }, returning: true }
     );
     res.status(200).send({
-      message: "Commission updated successfully!"
+      message: "Commission updated successfully!",
     });
   } catch (error) {
     sendErrorResponse(error, res);

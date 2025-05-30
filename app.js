@@ -3,11 +3,14 @@ const config = require("config");
 const sequelize = require("./config/db");
 const PORT = config.get("port") || 4000;
 const indexRouter = require("./routes/index.routes")
+const cookieParser = require('cookie-parser');
 
 const app = express();
 app.use(express.json());
 
+app.use(cookieParser())
 app.use("/api", indexRouter);
+
 
 async function start() {
   try {

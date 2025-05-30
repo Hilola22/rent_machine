@@ -2,6 +2,7 @@ const { sendErrorResponse } = require("../helpers/send.error.response");
 const User = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const UserAddress = require("../models/user_address");
+const Role = require("../models/role.model");
 
 const addUser = async (req, res) => {
   try {
@@ -35,11 +36,17 @@ const findAll = async (req, res) => {
   try {
     const users = await User.findAll({
       include: [
-        { 
-          model: UserAddress, 
-          attributes: ["name", "address"] 
-        }],
-        attributes: ["full_name", "phone"],
+        {
+          model: UserAddress,
+          attributes: ["name", "address"],
+        },
+        {
+          model: Role,
+          attributes: ["name"],
+          // through: { attributes: [] }   //o'rtadagi bog'lanagan ableni ko'rsatmaslik
+        },
+      ],
+      attributes: ["full_name", "phone"],
     });
     res.status(200).send({ data: users });
   } catch (error) {

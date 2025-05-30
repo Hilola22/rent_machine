@@ -9,6 +9,11 @@ const usersRouter = require("../routes/users.routes");
 const useraddressRouter = require("../routes/user_address.routes");
 const machineRouter = require("../routes/machine.routes");
 const reviewRouter = require("../routes/review.routes");
+const roleRouter = require("../routes/role.routes");
+const userRoleRouter = require("./user_role.routes");
+const authRouter = require("./auth.routes");
+const contractRouter = require("./contract.routes");
+const paymentRouter = require("./payment.routes");
 
 router.use("/category", categoryRouter);
 router.use("/region", regionRouter);
@@ -20,5 +25,10 @@ router.use("/users", usersRouter);
 router.use("/useraddress", useraddressRouter);
 router.use("/machine", machineRouter);
 router.use("/review", reviewRouter);
+router.use("/role", roleRouter);
+router.use("/user-role", userRoleRouter);
+router.use("/auth", authRouter);
+router.use("/contract", contractRouter);
+router.use("/payment", paymentRouter);
 
 module.exports = router;
