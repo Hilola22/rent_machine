@@ -9,7 +9,7 @@ module.exports = new Sequelize(
     dialect: "postgres",
     host: config.get("db_host"),
     port: config.get("db_port"),
-    logging: console.log,
+    logging: false,
     define: {
       timestamps: false,
     },

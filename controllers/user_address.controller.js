@@ -1,6 +1,7 @@
 const UserAddress = require("../models/user_address");
 const User = require("../models/user.model");
 const { sendErrorResponse } = require("../helpers/send.error.response");
+const Role = require("../models/role.model");
 
 const addUserAddress = async (req, res) => {
   try {
@@ -27,14 +28,15 @@ const addUserAddress = async (req, res) => {
 
 const findAll = async (req, res) => {
   try {
-    const userAddresses = await UserAddress.findAll({ include: [
-      {
-        model: User,
-        attributes: ["full_name", "phone"],
-      }
-    ],
-    attributes: ["name", "address"]
-  });
+    const userAddresses = await UserAddress.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ["full_name", "phone"],
+        }
+      ],
+      attributes: ["name", "address"],
+    });
     res.status(200).send({ data: userAddresses });
   } catch (error) {
     sendErrorResponse(error, res);

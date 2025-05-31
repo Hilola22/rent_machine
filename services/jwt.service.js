@@ -40,8 +40,6 @@ const authorJwtService = new JwtService(
   config.get("refreshTimeAuthor")
 );
 
-
-
 module.exports = {
   authorJwtService,
 };

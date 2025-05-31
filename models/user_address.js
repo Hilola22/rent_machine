@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
 const User = require("./user.model");
+const Role = require("./role.model");
 
 const UserAddress = sequelize.define(
   "user_address",
@@ -35,5 +36,7 @@ const UserAddress = sequelize.define(
 
 User.hasMany(UserAddress);
 UserAddress.belongsTo(User);
+
+// User.belongsTo(Role);
 
 module.exports = UserAddress;

@@ -19,7 +19,7 @@ const addUserRole = async (req, res) => {
     }
 
     const hasRole = user.roles.some((r) => r.id !== roleId);
-    if (!hasRole) {
+    if (hasRole) {
       return sendErrorResponse(
         { message: "Bunday role allaqachon mavjud" },
         res
